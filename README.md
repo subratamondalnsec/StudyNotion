@@ -1,4 +1,4 @@
-# StudyNotion Online Education Platform (MERN App) 
+# StudyNotion Online Education Platform (MERN WebApp) 
 
 [![StudyNotion Logo](https://res.cloudinary.com/dvpulu3cc/image/upload/v1702489710/Screenshot_2023-12-13_231558_dwyhv3.png)](https://studynotion-frontend-black.vercel.app/)
 
