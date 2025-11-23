@@ -29,7 +29,7 @@ function SignupForm() {
 
   const { firstName, lastName, email, password, confirmPassword } = formData
 
-  // Handle input fields, when some value changes
+  // Handle input fields
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -45,18 +45,19 @@ function SignupForm() {
       toast.error("Passwords Do Not Match")
       return
     }
+
     const signupData = {
       ...formData,
       accountType,
     }
 
-    // Setting signup data to state
-    // To be used after otp verification
+    // Store signup data
     dispatch(setSignupData(signupData))
-    // Send OTP to user for verification
+
+    // Send OTP
     dispatch(sendOtp(formData.email, navigate))
 
-    // Reset
+    // Reset form
     setFormData({
       firstName: "",
       lastName: "",
@@ -67,18 +68,7 @@ function SignupForm() {
     setAccountType(ACCOUNT_TYPE.STUDENT)
   }
 
-  // 🔹 Go to /login and tell it to autofill demo credentials
-  const handleGoToLoginAutofill = () => {
-    navigate("/login", {
-      state: {
-        autoFillDemo: true,
-        demoEmail: "barun6169@gmail.com",
-        demoPassword: "barun6169@",
-      },
-    })
-  }
-
-  // data to pass to Tab component
+  // Tab data
   const tabData = [
     {
       id: 1,
@@ -94,25 +84,17 @@ function SignupForm() {
 
   return (
     <div>
-      {/* 🔵 Top Note Section */}
-      <div className="mb-4 rounded-md bg-richblack-700 p-3 text-sm text-richblack-50">
-        <p className="font-semibold">Use this Credential to Login (Demo):</p>
-        <p>
-          Email:{" "}
-          <span className="text-yellow-50">barun6169@gmail.com</span>
-        </p>
-        <p>
-          Password:{" "}
-          <span className="text-yellow-50">barun6169@</span>
-        </p>
-        <button
-          type="button"
-          onClick={handleGoToLoginAutofill}
-          className="mt-2 rounded-md bg-yellow-50 px-3 py-1 text-sm font-semibold text-richblack-900"
+
+      {/* 🔹 Top Note Section */}
+      <p className="mb-4 text-sm text-richblack-300">
+        Use this credential —{" "}
+        <span
+          onClick={() => navigate("/login")}
+          className="text-yellow-50 cursor-pointer underline hover:text-yellow-100"
         >
-          Go to Login &amp; Fill Automatically
-        </button>
-      </div>
+          click here
+        </span>
+      </p>
 
       {/* Tab */}
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
@@ -134,6 +116,7 @@ function SignupForm() {
               className="form-style w-full"
             />
           </label>
+
           <label>
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Last Name <sup className="text-pink-200">*</sup>
@@ -149,6 +132,7 @@ function SignupForm() {
             />
           </label>
         </div>
+
         <label className="w-full">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
             Email Address <sup className="text-pink-200">*</sup>
@@ -163,6 +147,7 @@ function SignupForm() {
             className="form-style w-full"
           />
         </label>
+
         <div className="flex gap-x-4">
           <label className="relative">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
@@ -188,6 +173,7 @@ function SignupForm() {
               )}
             </span>
           </label>
+
           <label className="relative">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Confirm Password <sup className="text-pink-200">*</sup>
@@ -213,6 +199,7 @@ function SignupForm() {
             </span>
           </label>
         </div>
+
         <button
           type="submit"
           className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
