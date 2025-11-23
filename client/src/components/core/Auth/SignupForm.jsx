@@ -67,6 +67,17 @@ function SignupForm() {
     setAccountType(ACCOUNT_TYPE.STUDENT)
   }
 
+  // 🔹 Go to /login and tell it to autofill demo credentials
+  const handleGoToLoginAutofill = () => {
+    navigate("/login", {
+      state: {
+        autoFillDemo: true,
+        demoEmail: "barun6169@gmail.com",
+        demoPassword: "barun6169@",
+      },
+    })
+  }
+
   // data to pass to Tab component
   const tabData = [
     {
@@ -83,8 +94,29 @@ function SignupForm() {
 
   return (
     <div>
+      {/* 🔵 Top Note Section */}
+      <div className="mb-4 rounded-md bg-richblack-700 p-3 text-sm text-richblack-50">
+        <p className="font-semibold">Use this Credential to Login (Demo):</p>
+        <p>
+          Email:{" "}
+          <span className="text-yellow-50">barun6169@gmail.com</span>
+        </p>
+        <p>
+          Password:{" "}
+          <span className="text-yellow-50">barun6169@</span>
+        </p>
+        <button
+          type="button"
+          onClick={handleGoToLoginAutofill}
+          className="mt-2 rounded-md bg-yellow-50 px-3 py-1 text-sm font-semibold text-richblack-900"
+        >
+          Go to Login &amp; Fill Automatically
+        </button>
+      </div>
+
       {/* Tab */}
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
+
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
