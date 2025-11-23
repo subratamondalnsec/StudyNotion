@@ -13,7 +13,6 @@ function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // student or instructor
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
 
   const [formData, setFormData] = useState({
@@ -37,7 +36,7 @@ function SignupForm() {
     }))
   }
 
-  // Handle Form Submission
+  // Handle form submit
   const handleOnSubmit = (e) => {
     e.preventDefault()
 
@@ -51,10 +50,7 @@ function SignupForm() {
       accountType,
     }
 
-    // Store signup data
     dispatch(setSignupData(signupData))
-
-    // Send OTP
     dispatch(sendOtp(formData.email, navigate))
 
     // Reset form
@@ -68,7 +64,6 @@ function SignupForm() {
     setAccountType(ACCOUNT_TYPE.STUDENT)
   }
 
-  // Tab data
   const tabData = [
     {
       id: 1,
@@ -85,16 +80,18 @@ function SignupForm() {
   return (
     <div>
 
-      {/* 🔹 Top Note Section */}
-      <p className="mb-4 text-sm text-richblack-300">
-        Use this credential —{" "}
-        <span
-          onClick={() => navigate("/login")}
-          className="text-yellow-50 cursor-pointer underline hover:text-yellow-100"
-        >
-          click here
-        </span>
-      </p>
+      {/* 🔹 Top Note Section (Bigger White Text + Bold Box) */}
+      <div className="mb-5 bg-yellow-400/20 border border-yellow-400 rounded-xl p-4 shadow-md">
+        <p className="text-lg font-extrabold text-white">
+          Use this credential —{" "}
+          <span
+            onClick={() => navigate("/login")}
+            className="cursor-pointer underline text-yellow-200 hover:text-yellow-100"
+          >
+            click here
+          </span>
+        </p>
+      </div>
 
       {/* Tab */}
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
@@ -103,7 +100,7 @@ function SignupForm() {
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
           <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mb-1 text-[0.875rem] text-richblack-5">
               First Name <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -118,7 +115,7 @@ function SignupForm() {
           </label>
 
           <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mb-1 text-[0.875rem] text-richblack-5">
               Last Name <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -134,7 +131,7 @@ function SignupForm() {
         </div>
 
         <label className="w-full">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+          <p className="mb-1 text-[0.875rem] text-richblack-5">
             Email Address <sup className="text-pink-200">*</sup>
           </p>
           <input
@@ -150,7 +147,7 @@ function SignupForm() {
 
         <div className="flex gap-x-4">
           <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mb-1 text-[0.875rem] text-richblack-5">
               Create Password <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -164,7 +161,7 @@ function SignupForm() {
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              className="absolute right-3 top-[38px] cursor-pointer"
             >
               {showPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -175,7 +172,7 @@ function SignupForm() {
           </label>
 
           <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mb-1 text-[0.875rem] text-richblack-5">
               Confirm Password <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -189,7 +186,7 @@ function SignupForm() {
             />
             <span
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              className="absolute right-3 top-[38px] cursor-pointer"
             >
               {showConfirmPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
