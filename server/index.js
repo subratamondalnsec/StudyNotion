@@ -44,7 +44,8 @@ const allowedOrigins = [
   "http://localhost:3002",
   "http://localhost:3003",
   "http://localhost:3000",
-  "https://studynotion-education.vercel.app/" // ⬅️ add this 
+  "https://studynotion-education.vercel.app/",
+"https://studynotion-education.vercel.app",
 ]
 
 app.use(
