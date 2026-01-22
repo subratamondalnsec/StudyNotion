@@ -91,7 +91,7 @@ app.get("*", (req, res) => {
 });
 
 // Testing the server
-app.get("/", (req, res) => {
+app.get("/health", (req, res) => {
 	return res.json({
 		success: true,
 		message: "Your server is up and running ...",
