@@ -84,6 +84,13 @@ require("dotenv").config();
 // 	res.sendFile(path.resolve(_dirname,"client","build","index.html"));
 // });
 
+app.get("/health", (req, res) => {
+	return res.json({
+		success: true,
+		message: "Your server is up and running ...",
+	});
+});
+
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("*", (req, res) => {
@@ -91,12 +98,7 @@ app.get("*", (req, res) => {
 });
 
 // Testing the server
-app.get("/health", (req, res) => {
-	return res.json({
-		success: true,
-		message: "Your server is up and running ...",
-	});
-});
+
 
 // Listening to the server
 app.listen(PORT, () => {
