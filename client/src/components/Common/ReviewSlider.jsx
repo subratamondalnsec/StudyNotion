@@ -1,110 +1,113 @@
-import React, { useEffect, useState } from "react"
-import ReactStars from "react-rating-stars-component"
+import React from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css"
-import "swiper/css/free-mode"
-import "swiper/css/pagination"
-import "../../App.css"
-// Icons
-import { FaStar } from "react-icons/fa"
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
+
 // Import required modules
-import { Autoplay, FreeMode, Pagination } from "swiper/modules"
+import { Autoplay, FreeMode, Pagination } from "swiper/modules";
+import { FaStar } from "react-icons/fa";
 
-// Get apiFunction and the endpoint
-import { apiConnector } from "../../services/apiConnector"
-import { ratingsEndpoints } from "../../services/apis"
+// Dummy Data to ensure the slider always renders!
+const dummyReviews = [
+  {
+    user: { firstName: "Jane", lastName: "Cooper", image: "https://api.dicebear.com/5.x/initials/svg?seed=Jane%20Cooper" },
+    course: { courseName: "Full Stack Web Development" },
+    rating: 5,
+    review: "This platform completely changed my career trajectory. The PERN stack projects were incredibly hands-on and practical.",
+  },
+  {
+    user: { firstName: "Wade", lastName: "Warren", image: "https://api.dicebear.com/5.x/initials/svg?seed=Wade%20Warren" },
+    course: { courseName: "Advanced Machine Learning" },
+    rating: 4.5,
+    review: "The breakdown of complex algorithms into digestible visual components was exactly what I needed. Highly recommend!",
+  },
+  {
+    user: { firstName: "Eleanor", lastName: "Pena", image: "https://api.dicebear.com/5.x/initials/svg?seed=Eleanor%20Pena" },
+    course: { courseName: "UI/UX Masterclass" },
+    rating: 5,
+    review: "As a designer, I appreciate a clean interface. The learning environment here is top-notch and completely distraction-free.",
+  },
+  {
+    user: { firstName: "Ralph", lastName: "Edwards", image: "https://api.dicebear.com/5.x/initials/svg?seed=Ralph%20Edwards" },
+    course: { courseName: "Data Structures & Algorithms" },
+    rating: 4.5,
+    review: "Finally conquered dynamic programming thanks to these instructors. The timeline of learning is perfectly paced.",
+  }
+];
 
-function ReviewSlider() {
-  const [reviews, setReviews] = useState([])
-  const truncateWords = 15
-
-  useEffect(() => {
-    ;(async () => {
-      const { data } = await apiConnector(
-        "GET",
-        ratingsEndpoints.REVIEWS_DETAILS_API
-      )
-      if (data?.success) {
-        setReviews(data?.data)
-      }
-    })()
-  }, [])
-
-  // console.log(reviews)
-
+const ReviewSlider = () => {
   return (
-    <div className="text-white">
-      <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
+    <div className="w-full relative z-20 mt-10">
+      <div className="max-w-maxContentTab lg:max-w-maxContent mx-auto">
         <Swiper
-          // slidesPerView={4}
-          slidesPerView={Math.min(4, reviews.length)}
+          slidesPerView={1}
           spaceBetween={25}
-          // loop={true}
-           loop={reviews.length > 4}
+          loop={true}
           freeMode={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
           modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          className="w-full"
         >
-          {reviews.map((review, i) => {
-            return (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={
-                        review?.user?.image
-                          ? review?.user?.image
-                          : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
-                      }
-                      alt=""
-                      className="h-9 w-9 rounded-full object-cover"
-                    />
-                    <div className="flex flex-col">
-                      <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
-                      <h2 className="text-[12px] font-medium text-richblack-500">
-                        {review?.course?.courseName}
-                      </h2>
-                    </div>
-                  </div>
-                  <p className="font-medium text-richblack-25">
-                    {review?.review.split(" ").length > truncateWords
-                      ? `${review?.review
-                          .split(" ")
-                          .slice(0, truncateWords)
-                          .join(" ")} ...`
-                      : `${review?.review}`}
-                  </p>
-                  <div className="flex items-center gap-2 ">
-                    <h3 className="font-semibold text-yellow-100">
-                      {review.rating.toFixed(1)}
+          {dummyReviews.map((review, i) => (
+            <SwiperSlide key={i}>
+              {/* The Glassmorphism Review Card */}
+              <div className="flex flex-col gap-4 bg-richblack-800/60 backdrop-blur-sm border border-richblack-700 p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_10px_20px_rgba(6,182,212,0.15)] h-[250px]">
+                
+                {/* User Info Header */}
+                <div className="flex items-center gap-4">
+                  <img
+                    src={review?.user?.image}
+                    alt={`${review?.user?.firstName} profile`}
+                    className="h-12 w-12 rounded-full object-cover shadow-[0_0_10px_rgba(6,182,212,0.3)]"
+                  />
+                  <div className="flex flex-col">
+                    <h3 className="font-semibold text-richblack-5 text-lg">
+                      {review?.user?.firstName} {review?.user?.lastName}
                     </h3>
-                    <ReactStars
-                      count={5}
-                      value={review.rating}
-                      size={20}
-                      edit={false}
-                      activeColor="#ffd700"
-                      emptyIcon={<FaStar />}
-                      fullIcon={<FaStar />}
-                    />
+                    <p className="text-[13px] font-medium text-richblack-300">
+                      {review?.course?.courseName}
+                    </p>
                   </div>
                 </div>
-              </SwiperSlide>
-            )
-          })}
-          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
+
+                {/* Review Text */}
+                <p className="font-medium text-richblack-100 text-sm leading-relaxed overflow-hidden">
+                  "{review?.review}"
+                </p>
+
+                {/* Star Rating Box placed at the bottom */}
+                <div className="mt-auto flex items-center gap-2">
+                  <p className="font-bold text-[#06b6d4] text-lg">{review?.rating}</p>
+                  <div className="flex items-center gap-1 text-[#06b6d4]">
+                    {/* Rendering 5 stars statically for the mock data */}
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                  </div>
+                </div>
+
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ReviewSlider
-
+export default ReviewSlider;
