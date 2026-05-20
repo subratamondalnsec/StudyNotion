@@ -131,5 +131,30 @@ module.exports = {
       },
     },
   },
+  
   plugins: [],
+  colors: {
+  brand: {
+    100: "#cffafe",
+    300: "#67e8f9",
+    500: "#06b6d4", 
+    700: "#0e7490",
+    900: "#164e63",
+  },
+  richblack: {
+    5: "#F1F2FF",
+    25: "#DBDDEA",
+    50: "#C5C7D4",
+    100: "#AFB2BF",
+    200: "#999DAA",
+    300: "#838894",
+    400: "#6D727F",
+    500: "#585D69",
+    600: "#424854",
+    700: "#2C333F",
+    800: "#161D29",
+    900: "#000814",
+  },
+  // Keep yellow or any other colors they had here too!
+}
 };
