@@ -9,7 +9,7 @@ const TimeLine = [
     {
       Logo: Logo1,
       Heading: "Leadership",
-      Description: "Fully committed to the success company",
+      Description: "Fully committed to the success of the company",
     },
     {
       Logo: Logo2,
@@ -19,7 +19,7 @@ const TimeLine = [
     {
       Logo: Logo3,
       Heading: "Flexibility",
-      Description: "The ability to switch is an important skills",
+      Description: "The ability to switch is an important skill",
     },
     {
       Logo: Logo4,
