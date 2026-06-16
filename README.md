@@ -159,8 +159,17 @@ StudyNotion is a comprehensive educational platform aimed at providing a seamles
 - MongoDB
 - Git
 
+```bash
 ### Installation
 ```bash
-git clone https://github.com/subratamondalnsec/StudyNotion.git
+git clone [https://github.com/subratamondalnsec/StudyNotion.git](https://github.com/subratamondalnsec/StudyNotion.git)
 cd StudyNotion
+
+# 1. Install dependencies
 npm install
+
+# 2. Configure environment variables (MongoDB, Cloudinary, Razorpay, etc.)
+cp .env.example .env
+
+# 3. Start the application locally
+npm run dev
